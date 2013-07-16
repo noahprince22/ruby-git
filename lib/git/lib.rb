@@ -400,6 +400,7 @@ module Git
       arr_opts << '-a' if opts[:add_all]
       arr_opts << '--allow-empty' if opts[:allow_empty]
       arr_opts << "--author" << opts[:author] if opts[:author]
+      arr_opts << "-f" if opts[:force]
       command('commit', arr_opts)
     end
 
