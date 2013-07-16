@@ -400,7 +400,6 @@ module Git
       arr_opts << '-a' if opts[:add_all]
       arr_opts << '--allow-empty' if opts[:allow_empty]
       arr_opts << "--author" << opts[:author] if opts[:author]
-      arr_opts << "-f" if opts[:force]
       command('commit', arr_opts)
     end
 
@@ -539,8 +538,9 @@ module Git
     end
     
     def push(remote, branch = 'master', tags = false)
+      arr_opts << "-f" if opts[:force]
       command('push', [remote, branch])
-      command('push', ['--tags', remote]) if tags
+      command('push', arr_opts,['--tags', remote]) if tags
     end
     
     def tag_sha(tag_name)
